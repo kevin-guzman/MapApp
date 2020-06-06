@@ -5,13 +5,12 @@ import {StyleSheet,
         Button,
         TextInput,
         Picker,
-        Alert,
+        TouchableOpacity,
         ScrollView,
         AsyncStorage
         } from 'react-native';
 
-import { LinearGradient } from 'expo-linear-gradient';
-
+import Styles from '../styles/style'
 
 
 class Start extends Component {
@@ -228,32 +227,49 @@ class Start extends Component {
     let {StateMessage} = this.state;
 
         return (
-
-        
-            <ScrollView>
+            
             <View style={styles.container}>
-
-                <LinearGradient 
-                    colors={[   'rgba(222,239,246,1)', 
-                                'rgba(255,255,255,0.8)']} 
-                    style={{flex:1}}
-                >
-
-
-                    <View style={styles.viewTextImput} >
-
+                <ScrollView>
+                    <View style={styles.bodyContent}>
+                        <View style={styles.bodyHeader}>
+                            <Text style={styles.TextHeadline}>Datos personales</Text>
+                        </View>
                         <TextInput  
                             style={styles.TextInput} 
                             onChangeText={(Name) => this.setState({Name})}
                             placeholder= "Nombre"
                         />
-
                         <TextInput
                             style={styles.TextInput} 
                             onChangeText={(Edad) => this.setState({Edad})}
                             placeholder= "Edad"
                         />
+                        <View style={styles.TextInput} >
+                            <Picker
+                                selectedValue={this.state.selectedEPSType}
+                                onValueChange={ (value) => ( this.setState({selectedEPSType : value}) )}>
+                                { this.EPSList() }
+                            </Picker>                        
+                        </View> 
 
+                        <View style={styles.TextInput} >
+                            <Picker
+                                selectedValue={this.state.selectedIdentificationType}
+                                onValueChange={ (value) => ( this.setState({selectedIdentificationType : value}) )}>
+                                { this.IdentificationList() }
+                            </Picker>                        
+                        </View>
+
+                        <TextInput  style={styles.TextInput} 
+                                    placeholder="Número de identificación"
+                                    onChangeText={(NI) => this.setState({NI}) }
+                        />
+                        
+                    </View>
+                    <View style={styles.bodyContent}>
+                        <View style={styles.bodyHeader}>
+                            <Text style={styles.TextHeadline}>Contacto</Text>
+                        </View>
                         <TextInput
                             style={styles.TextInput} 
                             onChangeText={(Email) => this.setState({Email})}
@@ -278,32 +294,12 @@ class Start extends Component {
                             placeholder= "Numero telefónico de un familiar"
                         />
 
-                        <View style={styles.TextInput} >
-                            <Picker
-                                selectedValue={this.state.selectedEPSType}
-                                onValueChange={ (value) => ( this.setState({selectedEPSType : value}) )}>
-                                { this.EPSList() }
-                            </Picker>                        
-                        </View> 
-
-                        <View style={styles.TextInput} >
-                            <Picker
-                                selectedValue={this.state.selectedIdentificationType}
-                                onValueChange={ (value) => ( this.setState({selectedIdentificationType : value}) )}>
-                                { this.IdentificationList() }
-                            </Picker>                        
-                        </View>
-
-                        <TextInput  style={styles.TextInput} 
-                                    placeholder="Número de identificación"
-                                    onChangeText={(NI) => this.setState({NI}) }
-                        />
+                        
 
                         <TextInput  style={styles.TextInput} 
                                     placeholder="Direccion"
                                     onChangeText={(Address) => this.setState({Address})}
                         />
-
                         <View style={styles.TextInput} >
                             <Picker
                                 selectedValue={this.state.selectedLocalidadType}
@@ -318,22 +314,14 @@ class Start extends Component {
                         </Text>
                         </View>
 
-                        <View  style={styles.Button} >
-                            <Button 
-                                title="Siguiente"
-                                onPress={() => this.SingIn()}
-                            >
-
-                            </Button>                        
-                        </View>
-
                     </View>
                     
-
-                </LinearGradient>     
+                    <TouchableOpacity style={styles.buttonSecondary} onPress={()=>this.SingIn()}> 
+                        <Text style={{color:'#2BAEF7',fontSize: 14,}}> Siguiente </Text>
+                    </TouchableOpacity> 
+                </ScrollView>
             
             </View>
-            </ScrollView>
         );
     }
 
@@ -346,43 +334,57 @@ class Start extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
-    //backgroundColor: '#fff',
-    //paddingBottom:'15%'   
-    
+    backgroundColor: '#629FDD'
   },
-
-  buttonLeft:{
-    //flex:1,
-    margin:'3%',
-  },
-
-  buttonRight:{
-    margin:'3%',
+  bodyHeader:{
+    flex:0.5,
+    //justifyContent:'flex-end',
+    //alignItems:'center',
     
   },
-
+  bodyContent:{
+    flex:3,
+    margin:"6%",
+    borderColor: 'black',
+    //borderWidth:1,
+    borderRadius: 15,
+    backgroundColor:'white',
+    elevation: 8
+    
+  },
   viewTextImput:{
       marginTop:'15%',
       flex:1,
       flexDirection:'column',
   },
-
   TextInput:{
       borderColor:'gray',
       borderBottomWidth:1,
       marginTop:'5%',
-      marginHorizontal:'17%'
+      marginHorizontal:'6%',
+      marginBottom:'2%'
   },
-
-  Button:{
-      marginTop:'5%',
-      width:'30%',
-      height:'10%',
-      marginLeft:'63%',
-      marginBottom:'15%'
-      //flex:1
+  buttonSecondary: {
+    marginLeft:'30%',
+    marginRight:'30%',
+    marginBottom:'5%',
+    alignItems: "center",
+    borderColor: "#2BAEF7",
+    borderWidth: 1,
+    borderRadius: 13,
+    paddingBottom: 12,
+    paddingTop: 12,
+    paddingLeft: 33,
+    paddingRight: 33,
+    backgroundColor: 'white'
   },
+  TextHeadline: {
+    fontSize: 24,
+    textAlign: 'left',
+    color:'gray',
+    marginLeft: '3%'
+  },
+  
 
 
 
