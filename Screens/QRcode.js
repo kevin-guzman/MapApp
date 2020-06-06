@@ -9,6 +9,7 @@ import {    StyleSheet,
             AsyncStorage
         } from 'react-native';
 import {QRCode} from 'react-native-custom-qr-codes-expo';
+import Styles from '../styles/style'
 
 
 class QR extends Component{
@@ -94,28 +95,20 @@ class QR extends Component{
                 </View>
                 
                 <View style={styles.QR} >
-                    <QRCode
-                        
+                    <QRCode     
                         content={this.state.valueForQRCode} 
                         logosize={250}
                         color="#000"
                     />                    
                 </View>
-
-
-                <View style={styles.Button} >
-                    <Button
-                        title="Mapa"
-                        onPress={() => navigation.navigate('Hospitals')}
-                    />
+                <View style={styles.buttonRight} >
+                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}> 
+                        <Text style={Styles.TextButton}> Mapa </Text>
+                    </TouchableOpacity>
                 </View>
-                
             </View>
-
         )
-
     }
-
 }
 
 
@@ -124,17 +117,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         alignContent:'center',
-        marginTop:'15%',
+        marginTop:'15%'
         //marginBottom:'5%',
         //backgroundColor: '#fff',
     },
 
     QR:{
         //marginTop:'10%',
-        flex:4,
-        
-        
-
+        flex:4
     },
 
     header:{
@@ -182,27 +172,27 @@ const styles = StyleSheet.create({
     },
     
     TextInputStyle: {
-    width: '100%',
-    height: 40,
-    marginTop: 20,
-    borderWidth: 1,
-    textAlign: 'center',
+        width: '100%',
+        height: 40,
+        marginTop: 20,
+        borderWidth: 1,
+        textAlign: 'center',
     },
     
     button: {
-    width: '10%',
-    paddingTop: 8,
-    marginTop: 10,
-    paddingBottom: 8,
-    marginHorizontal:'15%',
-    //backgroundColor: '#F44336',
-    marginBottom: 20,
+        width: '10%',
+        paddingTop: 8,
+        marginTop: 10,
+        paddingBottom: 8,
+        marginHorizontal:'15%',
+        //backgroundColor: '#F44336',
+        marginBottom: 20,
     },
     
     TextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 18,
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 18,
     },
 
 });

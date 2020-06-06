@@ -4,7 +4,9 @@ import {View,
         Text, 
         TextInput, 
         TouchableOpacity,
-        AsyncStorage
+        AsyncStorage,
+        SafeAreaView,
+        KeyboardAvoidingView
     } from 'react-native'
 import Styles from '../styles/style'
 
@@ -102,7 +104,7 @@ export default class Login extends Component{
             <View style={style.container}>
                 <View style={style.header}>
                 </View>
-                <View style={style.body}>
+                <KeyboardAvoidingView style={style.body}>
                     <View style={style.bodyContent}>
                         <View style={style.bodyHeader}>
                             <Text style={Styles.TextBig}>Sign in</Text>
@@ -133,7 +135,7 @@ export default class Login extends Component{
                         </View>
                     </View>
                     
-                </View>
+                </KeyboardAvoidingView>
                 <View style={style.footer}>
                 
                 </View>
@@ -144,7 +146,8 @@ export default class Login extends Component{
 
 const style = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+        backgroundColor:'#629FDD'
     },
     header:{
         flex:1
@@ -158,9 +161,11 @@ const style = StyleSheet.create({
     bodyContent:{
         flex:3,
         margin:"5%",
-        borderColor: 'black',
-        borderWidth:1,
-        borderRadius: 15
+        //borderColor: 'black',
+        //borderWidth:1,
+        borderRadius: 15,
+        backgroundColor:'white',
+        elevation: 8
         
     },
     bodyFooter:{
@@ -177,10 +182,12 @@ const style = StyleSheet.create({
     textInput:{
         marginTop: '15%',
         borderBottomColor: 'black',
-        borderBottomWidth: 1,
-        borderRadius: 16,
+        borderBottomWidth: 0.5,
+        //borderRadius: 16,
+        borderTopLeftRadius: 14,
+        borderTopRightRadius:14,
         backgroundColor:"#EEEAEA",
-        height:"13%"
+        height:"20%"
     },
     bodyHeader:{
         flex:0.5,
