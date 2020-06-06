@@ -4,7 +4,8 @@ import { StyleSheet,
           View,
           StatusBar,
           TouchableOpacity,
-          Image
+          Image,
+          Alert
         } from 'react-native';
 import  MapView,
         {Marker,
@@ -55,14 +56,16 @@ class App extends Component {
                   {latitude: 4.699050, longitude: -74.050105, category:1, title:'Tunal'},
                   {latitude: 4.671959, longitude: -74.083579, category:2, title:'Chricales'},
                   {latitude: 4.683959, longitude: -74.083579, category:3, title:'Country'},
+                  {latitude: 4.671959, longitude: -74.050105, title:'Kennedy'},
       ], 
       Mapa:[],
       location:null,
       errorMsg:null,
       UserLatitude:0.0,
       UserLongitude:0.0,
-      HospitalCategory:'',
+      HospitalCategory:'NoSelected',
       Aux:0,
+      KeyRefresh:1,
     };
   }
 
@@ -133,7 +136,7 @@ class App extends Component {
         }
       )
 
-      {this.MapList()}
+      /* {this.MapList()} */
       
     
   }
@@ -161,16 +164,19 @@ class App extends Component {
                                 latitudeDelta: 0.27, /*0.0922*/
                                 longitudeDelta: 0.27, /*0.0421*/};
     const {navigation}= this.props;
+    const {HospitalCategory} = this.state;
+    const {KeyRefresh} = this.state;
       return (
 
         <View style={styles.container}>
 
-          <View style={styles.mapContainer}>
+          <View style={styles.mapContainer} key={KeyRefresh} >
             <MapView 
                 style={styles.mapStyle} 
                 showsUserLocation={true}
                 ref='map'
                 initialRegion={Bogotá_Coordinates}
+                
               >
                 
                 {
@@ -185,11 +191,12 @@ class App extends Component {
                           title={x.title }
                           description={x.address}
                           onCalloutPress={()=> this.GoToQR(x.title,x.address)}
+                          
 
                         >
                         
                         {
-                          x.category === 1?
+                          (x.category === 1 && HospitalCategory === 'Covid' ) || (HospitalCategory === 'NoSelected' && x.category === 1) ?
                             
                               <Image
                                   onLoad={() => this.forceUpdate()}
@@ -198,10 +205,8 @@ class App extends Component {
                                   style={styles.markerImage}
                                 >
                               </Image>
-
-                            
                             :
-                              x.category === 2?
+                              (x.category === 2 && HospitalCategory === 'General' ) || (HospitalCategory === 'NoSelected' && x.category === 2) ?
                                 <Image
                                   onLoad={() => this.forceUpdate()}
                                   onLayout={() => this.forceUpdate()}
@@ -210,7 +215,7 @@ class App extends Component {
                                 >
                                 </Image>                              
                                 :
-                                  x.category === 3?
+                                  (x.category === 3 && HospitalCategory === 'Odontologia' ) || (HospitalCategory === 'NoSelected' && x.category === 3) ?
                                     <Image
                                       onLoad={() => this.forceUpdate()}
                                       onLayout={() => this.forceUpdate()}
@@ -219,7 +224,13 @@ class App extends Component {
                                     >
                                     </Image>
                                     :
-                                    null                                
+                                      <Image
+                                        onLoad={() => this.forceUpdate()}
+                                        onLayout={() => this.forceUpdate()}
+                                        source={require('../Img/MapMarkers/Undefined.png')}
+                                        style={styles.markerImage}
+                                      >
+                                      </Image>                                
                         }
                       {/* <Image
                         onLoad={() => this.forceUpdate()}
@@ -244,7 +255,8 @@ class App extends Component {
             <View style={styles.footer} >
               <View style={styles.viewTouchable} >
                 <TouchableOpacity
-                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'Odontologia', KeyRefresh: KeyRefresh+1})
+                }
                   style={{
                           borderRadius:50,
                           borderColor:'rgba(26,100,122,1)',
@@ -261,7 +273,7 @@ class App extends Component {
 
               <View style={styles.viewTouchable} >
                 <TouchableOpacity
-                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'Covid', KeyRefresh: KeyRefresh+1})}
                   style={{
                           borderRadius:50,
                           borderColor:'rgba(44,129,49,q)',
@@ -278,7 +290,7 @@ class App extends Component {
 
               <View style={styles.viewTouchable} >
                 <TouchableOpacity
-                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'General', KeyRefresh: KeyRefresh+1})}
                   style={{
                           borderRadius:50,
                           borderColor:'rgba(131,39,39,1)',
@@ -295,7 +307,8 @@ class App extends Component {
 
               <View style={{flex:1,  /* marginTop:'8%', */ alignItems:'flex-end', marginHorizontal:'1%'}} >
                 <TouchableOpacity
-                  onPress={()=> this.componentDidMount()}
+                  onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'NoSelected', KeyRefresh: KeyRefresh+1})} //this.componentDidMount()
+                  
                 >
                   <Image 
                     source={Reload}
