@@ -259,8 +259,8 @@ class App extends Component {
                 }
                   style={{
                           borderRadius:50,
-                          borderColor:'rgba(26,100,122,1)',
-                          backgroundColor:'rgba(71,185,219,1)',
+                          borderColor:'rgba(26,100,122,0.8)',
+                          backgroundColor:'rgba(71,185,219,0.5)',
                           borderWidth:1,
                           margin:'3%',
                         }}
@@ -276,8 +276,8 @@ class App extends Component {
                   onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'Covid', KeyRefresh: KeyRefresh+1})}
                   style={{
                           borderRadius:50,
-                          borderColor:'rgba(44,129,49,q)',
-                          backgroundColor:'rgba(91,225,100,1)',
+                          borderColor:'rgba(44,129,49,0.8)',
+                          backgroundColor:'rgba(91,225,100,0.5)',
                           borderWidth:1,
                           margin:'3%',
                         }}
@@ -293,8 +293,8 @@ class App extends Component {
                   onPress={(KeyRefresh)=> this.setState({HospitalCategory: 'General', KeyRefresh: KeyRefresh+1})}
                   style={{
                           borderRadius:50,
-                          borderColor:'rgba(131,39,39,1)',
-                          backgroundColor:'rgba(214,67,67,1)',
+                          borderColor:'rgba(131,39,39,10.8)',
+                          backgroundColor:'rgba(214,67,67,0.5)',
                           borderWidth:1,
                           margin:'3%',
                         }}
