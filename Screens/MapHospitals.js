@@ -25,8 +25,7 @@ import OdontologiaMarker from '../Img/MapMarkers/OdontologiaMarker.png'
 
 
 
-var cont=0;
-var Saved;
+
 
 class App extends Component {
 
@@ -138,26 +137,20 @@ class App extends Component {
     
   }
 
-
   GoToQR = (HN,HA) =>{
     const {navigation}= this.props;
     
-    if (cont ===0  ){
-      cont++;
-      Saved= HN
-    }else{
-      cont=0
-      navigation.navigate('QR', {HospitalName: HN, HospitalAddres:HA, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })
-    }
-    
-    
+    navigation.navigate('QR', 
+                              {
+                                HospitalName: HN, 
+                                HospitalAddres:HA, 
+                                UserLatitude: this.state.UserLatitude, 
+                                UserLongitude: this.state.UserLongitude 
+                              }
+                          )
+  
   }
 
-
-
-
-
-  
 
 
   render(){
@@ -179,7 +172,6 @@ class App extends Component {
                 initialRegion={Bogotá_Coordinates}
               >
                 
-
                 {
                     this.state.Hospitals.map( (x,i) =>{    
                       return(
@@ -191,57 +183,10 @@ class App extends Component {
                           key={i}
                           title={x.title }
                           description={x.address}
-                          onPress={()=> this.GoToQR(x.title,x.address)}
-                          //onMagicTap={()=> this.GoToQR(x.title,x.address)}
+                          onCalloutPress={()=> this.GoToQR(x.title,x.address)}
 
-                          
-                          /* onSelect={
-                            () => navigation.navigate('QR', 
-                                      {
-                                      HospitalName: x.title, 
-                                      HospitalAddres:x.address, 
-                                      UserLatitude: this.state.UserLatitude, 
-                                      UserLongitude: this.state.UserLongitude 
-                                      }
-                                    )
-                          } */
-                          /* onPress={
-                            () => navigation.navigate('QR', 
-                                      {
-                                      HospitalName: x.title, 
-                                      HospitalAddres:x.address, 
-                                      UserLatitude: this.state.UserLatitude, 
-                                      UserLongitude: this.state.UserLongitude 
-                                      }
-                                    )
-                          } */
-                          
-                          //pinColor={this.MarkerColor(x.category,0)}
                         >
                         
-{/*                         <Callout  
-                          onLoad={() => this.forceUpdate()}
-                          onLayout={() => this.forceUpdate()}
-                          onPress ={  
-                                    () => navigation.navigate('QR', 
-                                      {
-                                      HospitalName: x.title, 
-                                      HospitalAddres:x.address, 
-                                      UserLatitude: this.state.UserLatitude, 
-                                      UserLongitude: this.state.UserLongitude 
-                                      }
-                                    )
-                                    }
-                        >
-                          <Text>
-                            {x.title}
-                          </Text>
-                          <Text style={{alignSelf:'center'}} >
-                            {x.address}
-                          </Text>        
-                        </Callout> */}
-
-
                         {
                           x.category === 1?
                             
@@ -295,14 +240,6 @@ class App extends Component {
 
             <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
               <TouchableOpacity
-<<<<<<< HEAD
-=======
-                onPress={()=> {this.componentDidMount()}}
-
-                onPress={()=> this.componentDidMount()}
-
-
->>>>>>> b1173eb2f59d4690fd227636c52880d54aa2c10e
                 onPress={()=> this.componentDidMount()}
               >
                 <Image 
