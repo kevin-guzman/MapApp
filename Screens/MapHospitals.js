@@ -238,17 +238,72 @@ class App extends Component {
               
           </View>  
 
-            <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
-              <TouchableOpacity
-                onPress={()=> this.componentDidMount()}
-              >
-                <Image 
-                  source={Reload}
-                  style={styles.image}
+             
+
+            <View style={styles.footer} >
+              <View style={styles.viewTouchable} >
+                <TouchableOpacity
+                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  style={{
+                          borderRadius:50,
+                          borderColor:'rgba(26,100,122,1)',
+                          backgroundColor:'rgba(71,185,219,1)',
+                          borderWidth:1,
+                          margin:'3%',
+                        }}
                 >
-                </Image>                
-              </TouchableOpacity>
-            </View>     
+                  <Text style={styles.textTouchable} >
+                      Odontología
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.viewTouchable} >
+                <TouchableOpacity
+                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  style={{
+                          borderRadius:50,
+                          borderColor:'rgba(44,129,49,q)',
+                          backgroundColor:'rgba(91,225,100,1)',
+                          borderWidth:1,
+                          margin:'3%',
+                        }}
+                >
+                  <Text style={styles.textTouchable} >
+                    Covid
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.viewTouchable} >
+                <TouchableOpacity
+                  onPress={()=> this.setState({HospitalCategory: ''})}
+                  style={{
+                          borderRadius:50,
+                          borderColor:'rgba(131,39,39,1)',
+                          backgroundColor:'rgba(214,67,67,1)',
+                          borderWidth:1,
+                          margin:'3%',
+                        }}
+                >
+                  <Text style={styles.textTouchable} >
+                    General
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={{flex:1,  /* marginTop:'8%', alignItems:'flex-end', marginHorizontal:'1%' */}} >
+                <TouchableOpacity
+                  onPress={()=> this.componentDidMount()}
+                >
+                  <Image 
+                    source={Reload}
+                    style={styles.image}
+                  >
+                  </Image>                
+                </TouchableOpacity>
+              </View> 
+            </View>
           
         </View>
     );
@@ -266,6 +321,16 @@ const styles = StyleSheet.create({
 
     //flexDirection:'row'
     
+  },
+
+  viewTouchable:{
+    //marginHorizontal:'2%',
+    alignSelf:'center',
+  },
+
+  textTouchable:{
+    textAlign:'center', 
+    margin:'3%'
   },
 
   markerImage:{
@@ -289,10 +354,16 @@ const styles = StyleSheet.create({
   },
 
   image:{
-    width:60,
-    height:60,
+    width:40,
+    height:40,
     borderRadius:30,
     //flex:1
+  },
+
+  footer:{
+    flexDirection:'row',
+    //justifyContent:'space-between',
+    marginVertical:'4%'
   },
 
 });
