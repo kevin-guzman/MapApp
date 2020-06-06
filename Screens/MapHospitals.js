@@ -292,7 +292,7 @@ class App extends Component {
                 </TouchableOpacity>
               </View>
 
-              <View style={{flex:1,  /* marginTop:'8%', alignItems:'flex-end', marginHorizontal:'1%' */}} >
+              <View style={{flex:1,  /* marginTop:'8%', */ alignItems:'flex-end', marginHorizontal:'1%'}} >
                 <TouchableOpacity
                   onPress={()=> this.componentDidMount()}
                 >
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
 
   viewTouchable:{
-    //marginHorizontal:'2%',
+    marginHorizontal:'1%',
     alignSelf:'center',
   },
 
@@ -354,8 +354,8 @@ const styles = StyleSheet.create({
   },
 
   image:{
-    width:40,
-    height:40,
+    width:45,
+    height:45,
     borderRadius:30,
     //flex:1
   },
@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
   footer:{
     flexDirection:'row',
     //justifyContent:'space-between',
-    marginVertical:'4%'
+    //marginVertical:'4%'
   },
 
 });
