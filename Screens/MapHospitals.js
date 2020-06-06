@@ -220,13 +220,13 @@ class App extends Component {
                                     :
                                     null                                
                         }
-                              {/* <Image
-                                onLoad={() => this.forceUpdate()}
-                                onLayout={() => this.forceUpdate()}
-                                source={require('../Img/MapMarkers/CovidMarker.png')}
-                                style={{width:50, height:50}}
-                              >
-                              </Image> */}
+                      {/* <Image
+                        onLoad={() => this.forceUpdate()}
+                        onLayout={() => this.forceUpdate()}
+                        source={require('../Img/MapMarkers/CovidMarker.png')}
+                        style={{width:50, height:50}}
+                      >
+                      </Image> */}
                           
 
                         </Marker>
