@@ -20,6 +20,9 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import Reload from '../Img/Reload.png'
+import CovidMarker from '../Img/MapMarkers/CovidMarker.png'
+import GeneralMarker from '../Img/MapMarkers/GeneralMarker.png'
+import OdontologiaMarker from '../Img/MapMarkers/OdontologiaMarker.png'
 
 
 
@@ -49,10 +52,11 @@ class App extends Component {
     this.state={
       Nombre:null,
       Hospitals:[],
-      /* Hospitals:[ {latitude: 4.699050, longitude: -74.050105},
-        {latitude: 4.671959, longitude: -74.083579},
-        {latitude: 4.683959, longitude: -74.083579},
-      ], */
+      /* Hospitals:[ 
+                  {latitude: 4.699050, longitude: -74.050105, category:1},
+                  {latitude: 4.671959, longitude: -74.083579, category:2},
+                  {latitude: 4.683959, longitude: -74.083579, category:3},
+      ],  */
       Mapa:[],
       location:null,
       errorMsg:null,
@@ -140,68 +144,11 @@ class App extends Component {
     navigation.navigate('QR', {HospitalName: HN, HospitalAddres:HA, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })
   }
 
-  MarkerColor  (HT, r){
-    let color='';
-    let category='';
-    //let marker = [];
 
-    if (HT === 1){
-      //this.setState({HospitalCategory: 'Covid-19'})
-      category='Covid-19'
-      color='green'
-    }else 
-      if (HT === 2){
-        //this.setState({HospitalCategory: 'Medicina general'})
-        category='Medicina general'
-        color='yellow'
-      }else
-        if(HT === 3){
-          //this.setState({HospitalCategory: 'Odontología'})
-          category='Odontología'
-          color='blue'
-        }else{
-          //this.setState({HospitalCategory: 'No definido'})
-          category= 'No definido'
-          color='black'
-        }
-    //this.setState({HospitalCategory: category})
-    
-    if (r ===0){
-      return(color)
-    }else{
-      return(category)
-    }
 
-  }
 
-  MapList = () =>{
-    return(
-      this.state.Hospitals.map( (x,i) =>{    
-        return(
-          <Marker 
-            coordinate={
-              {latitude: parseFloat(x.latitude) , 
-              longitude: parseFloat(x.longitude)} 
-            } 
-            key={i}
-            pinColor={this.MarkerColor(x.category,0)}
-          >
-            <Callout  onPress ={() => this.GoToQR(x.title,x.address)} >
-                  <Text>
-                    {x.title}
-                  </Text>
-                  <Text style={{alignSelf:'center'}} >
-                    {this.MarkerColor(x.category,1)}
-                  </Text>
-                  <Text style={{alignSelf:'center'}} >
-                    {x.address}
-                  </Text>       
-            </Callout>
-          </Marker>
-        )
-      } )
-    ); 
-  }   
+
+  
 
 
   render(){
@@ -210,14 +157,10 @@ class App extends Component {
                                 longitude: -74.0817500,
                                 latitudeDelta: 0.27, /*0.0922*/
                                 longitudeDelta: 0.27, /*0.0421*/};
-
+    const {navigation}= this.props;
       return (
 
         <View style={styles.container}>
-
-
-
-
 
           <View style={styles.mapContainer}>
             <MapView 
@@ -227,7 +170,77 @@ class App extends Component {
                 initialRegion={Bogotá_Coordinates}
               >
                 
-                {this.MapList()}
+
+                {
+                    this.state.Hospitals.map( (x,i) =>{    
+                      return(
+                        <Marker 
+                          coordinate={
+                            {latitude: parseFloat(x.latitude) , 
+                            longitude: parseFloat(x.longitude)} 
+                          } 
+                          key={i}
+                          //pinColor={this.MarkerColor(x.category,0)}
+                        >
+                        
+{/*                         <Callout   onPress ={() => navigation.navigate('QR', {HospitalName: x.title, HospitalAddres:x.address, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })}  >
+                          <Text>
+                            {x.title}
+                          </Text>
+                          <Text style={{alignSelf:'center'}} >
+                            {x.address}
+                          </Text>        
+                        </Callout> */}
+
+
+                        {
+                          x.category === 1?
+                            <TouchableOpacity
+                              onPress={()=> navigation.navigate('QR', {HospitalName: x.title, HospitalAddres:x.address, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })}
+                            >
+                              <Image
+                                  onLoad={() => this.forceUpdate()}
+                                  onLayout={() => this.forceUpdate()}
+                                  source={require('../Img/MapMarkers/CovidMarker.png')}
+                                  style={styles.markerImage}
+                                >
+                              </Image>
+                            </TouchableOpacity>
+                            
+                            :
+                              x.category === 2?
+                                <Image
+                                  onLoad={() => this.forceUpdate()}
+                                  onLayout={() => this.forceUpdate()}
+                                  source={require('../Img/MapMarkers/GeneralMarker.png')}
+                                  style={styles.markerImage}
+                                >
+                                </Image>                              
+                                :
+                                  x.category === 3?
+                                    <Image
+                                      onLoad={() => this.forceUpdate()}
+                                      onLayout={() => this.forceUpdate()}
+                                      source={require('../Img/MapMarkers/OdontologiaMarker.png')}
+                                      style={styles.markerImage}
+                                    >
+                                    </Image>
+                                    :
+                                    null                                
+                        }
+                              {/* <Image
+                                onLoad={() => this.forceUpdate()}
+                                onLayout={() => this.forceUpdate()}
+                                source={require('../Img/MapMarkers/CovidMarker.png')}
+                                style={{width:50, height:50}}
+                              >
+                              </Image> */}
+                          
+
+                        </Marker>
+                      )
+                    } )
+                }
                 
               </MapView>
               
@@ -235,15 +248,7 @@ class App extends Component {
 
             <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
               <TouchableOpacity
-<<<<<<< HEAD
-<<<<<<< HEAD
-                onPress={()=> {this.componentDidMount()}}
-=======
                 onPress={()=> this.componentDidMount()}
->>>>>>> 26401023650d631f608bd7a03dec145838a7091a
-=======
-                onPress={()=> this.componentDidMount()}
->>>>>>> 26401023650d631f608bd7a03dec145838a7091a
               >
                 <Image 
                   source={Reload}
@@ -267,6 +272,11 @@ const styles = StyleSheet.create({
     paddingTop:'15%',
     //flexDirection:'row'
     
+  },
+
+  markerImage:{
+    width:70,
+    height:70
   },
 
   mapStyle:{
