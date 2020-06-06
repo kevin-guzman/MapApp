@@ -20,7 +20,7 @@ const RootStack = createStackNavigator(
   Hospitals:MapHospitals,
   },
   {
-    initialRouteName: 'Login', //Login
+    initialRouteName: 'Hospitals', //Login
     headerMode:'none'
   },
   
