@@ -26,7 +26,8 @@ import OdontologiaMarker from '../Img/MapMarkers/OdontologiaMarker.png'
 
 
 
-
+var cont=0;
+var Saved;
 
 class App extends Component {
 
@@ -141,7 +142,16 @@ class App extends Component {
 
   GoToQR = (HN,HA) =>{
     const {navigation}= this.props;
-    navigation.navigate('QR', {HospitalName: HN, HospitalAddres:HA, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })
+    
+    if (cont ===0  ){
+      cont++;
+      Saved= HN
+    }else{
+      cont=0
+      navigation.navigate('QR', {HospitalName: HN, HospitalAddres:HA, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })
+    }
+    
+    
   }
 
 
@@ -180,10 +190,50 @@ class App extends Component {
                             longitude: parseFloat(x.longitude)} 
                           } 
                           key={i}
+                          title={x.title }
+                          description={x.address}
+                          onPress={()=> this.GoToQR(x.title,x.address)}
+                          //onMagicTap={()=> this.GoToQR(x.title,x.address)}
+
+                          
+                          /* onSelect={
+                            () => navigation.navigate('QR', 
+                                      {
+                                      HospitalName: x.title, 
+                                      HospitalAddres:x.address, 
+                                      UserLatitude: this.state.UserLatitude, 
+                                      UserLongitude: this.state.UserLongitude 
+                                      }
+                                    )
+                          } */
+                          /* onPress={
+                            () => navigation.navigate('QR', 
+                                      {
+                                      HospitalName: x.title, 
+                                      HospitalAddres:x.address, 
+                                      UserLatitude: this.state.UserLatitude, 
+                                      UserLongitude: this.state.UserLongitude 
+                                      }
+                                    )
+                          } */
+                          
                           //pinColor={this.MarkerColor(x.category,0)}
                         >
                         
-{/*                         <Callout   onPress ={() => navigation.navigate('QR', {HospitalName: x.title, HospitalAddres:x.address, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })}  >
+{/*                         <Callout  
+                          onLoad={() => this.forceUpdate()}
+                          onLayout={() => this.forceUpdate()}
+                          onPress ={  
+                                    () => navigation.navigate('QR', 
+                                      {
+                                      HospitalName: x.title, 
+                                      HospitalAddres:x.address, 
+                                      UserLatitude: this.state.UserLatitude, 
+                                      UserLongitude: this.state.UserLongitude 
+                                      }
+                                    )
+                                    }
+                        >
                           <Text>
                             {x.title}
                           </Text>
@@ -195,9 +245,7 @@ class App extends Component {
 
                         {
                           x.category === 1?
-                            <TouchableOpacity
-                              onPress={()=> navigation.navigate('QR', {HospitalName: x.title, HospitalAddres:x.address, UserLatitude: this.state.UserLatitude, UserLongitude: this.state.UserLongitude })}
-                            >
+                            
                               <Image
                                   onLoad={() => this.forceUpdate()}
                                   onLayout={() => this.forceUpdate()}
@@ -205,7 +253,7 @@ class App extends Component {
                                   style={styles.markerImage}
                                 >
                               </Image>
-                            </TouchableOpacity>
+
                             
                             :
                               x.category === 2?
@@ -248,14 +296,6 @@ class App extends Component {
 
             <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
               <TouchableOpacity
-<<<<<<< HEAD
-=======
-                onPress={()=> {this.componentDidMount()}}
-
-                onPress={()=> this.componentDidMount()}
-
-
->>>>>>> 8c72dceb98d5ce5f033aabb235805cd5118ef6dd
                 onPress={()=> this.componentDidMount()}
               >
                 <Image 
