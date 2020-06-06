@@ -85,10 +85,10 @@ class QR extends Component{
 
             <View style={styles.container} >
                 <View style={styles.header} >
-                    <Text>
+                    <Text style={Styles.TextTitle}>
                         Hospital: {JSON.stringify(navigation.getParam('HospitalName', ''))}
                     </Text>
-                    <Text>
+                    <Text style={Styles.TextTitle}>
                         Direccion: {JSON.stringify(navigation.getParam('HospitalAddres', ''))}
                     </Text>
                 </View>
@@ -114,86 +114,23 @@ class QR extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems:'center',
-        alignContent:'center',
-        marginTop: StatusBar.currentHeight
-        //marginTop:'15%'
-        //marginBottom:'5%',
-        //backgroundColor: '#fff',
+        marginTop: StatusBar.currentHeight,
     },
-
     QR:{
-        //marginTop:'10%',
-        flex:4
+        flex:4,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-
     header:{
         flex:1,
-        //marginVertical:'1%',
+        justifyContent: 'flex-end',
+        alignItems:'center'
     },
-
-    buttonLeft:{
-      //flex:1,
-        margin:'5%',
-    },
-
     buttonRight:{
-        //flex:1,
-        margin:'3%',
-        //marginHorizontal:'3%'
-    },
-
-    viewTextImput:{
-        marginTop:'15%',
-        flex:1
-    },
-
-    TextInput:{
-        borderColor:'gray',
-        borderBottomWidth:1,
-        marginTop:'5%',
-        marginHorizontal:'17%'
-    },
-
-    Button:{
-        marginTop:'10%',
-        width:'20%',
-        height:'30%',
-        marginLeft:'60%',
-        alignItems:'flex-end',
-        flex:1
-    },
-
-    MainContainer: {
-        flex: 1,
-        margin: 10,
-        alignItems: 'center',
-        paddingTop: 40,
-    },
-    
-    TextInputStyle: {
-        width: '100%',
-        height: 40,
-        marginTop: 20,
-        borderWidth: 1,
-        textAlign: 'center',
-    },
-    
-    button: {
-        width: '10%',
-        paddingTop: 8,
-        marginTop: 10,
-        paddingBottom: 8,
-        marginHorizontal:'15%',
-        //backgroundColor: '#F44336',
-        marginBottom: 20,
-    },
-    
-    TextStyle: {
-        color: '#fff',
-        textAlign: 'center',
-        fontSize: 18,
-    },
-
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems: 'center'
+    }
 });
 export default QR
