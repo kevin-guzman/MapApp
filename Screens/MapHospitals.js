@@ -247,14 +247,11 @@ class App extends Component {
 
             <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
               <TouchableOpacity
-<<<<<<< HEAD
-=======
                 onPress={()=> {this.componentDidMount()}}
 
                 onPress={()=> this.componentDidMount()}
 
 
->>>>>>> 8c72dceb98d5ce5f033aabb235805cd5118ef6dd
                 onPress={()=> this.componentDidMount()}
               >
                 <Image 
