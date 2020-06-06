@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import { StyleSheet, 
           Text, 
           View,
-          Button,
+          StatusBar,
           TouchableOpacity,
-          Alert,
           Image
         } from 'react-native';
 import  MapView,
@@ -296,6 +295,14 @@ class App extends Component {
 
             <View style={{flex:1, marginTop:'8%',alignItems:'flex-end', marginHorizontal:'5%'}} >
               <TouchableOpacity
+<<<<<<< HEAD
+=======
+                onPress={()=> {this.componentDidMount()}}
+
+                onPress={()=> this.componentDidMount()}
+
+
+>>>>>>> b1173eb2f59d4690fd227636c52880d54aa2c10e
                 onPress={()=> this.componentDidMount()}
               >
                 <Image 
@@ -317,7 +324,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop:'15%',
+    marginTop: StatusBar.currentHeight
+    //paddingTop:'15%',
+
     //flexDirection:'row'
     
   },

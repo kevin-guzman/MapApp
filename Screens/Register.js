@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {StyleSheet, 
         Text, 
         View,
-        Button,
+        StatusBar,
         TextInput,
         Picker,
         TouchableOpacity,
@@ -334,7 +334,8 @@ class Start extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#629FDD'
+    backgroundColor: '#629FDD',
+    marginTop: StatusBar.currentHeight
   },
   bodyHeader:{
     flex:0.5,
