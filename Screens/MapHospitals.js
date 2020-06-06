@@ -51,11 +51,11 @@ class App extends Component {
     this.state={
       Nombre:null,
       Hospitals:[],
-      /* Hospitals:[ 
-                  {latitude: 4.699050, longitude: -74.050105, category:1},
-                  {latitude: 4.671959, longitude: -74.083579, category:2},
-                  {latitude: 4.683959, longitude: -74.083579, category:3},
-      ],  */
+      Hospitals:[ 
+                  {latitude: 4.699050, longitude: -74.050105, category:1, title:'Tunal'},
+                  {latitude: 4.671959, longitude: -74.083579, category:2, title:'Chricales'},
+                  {latitude: 4.683959, longitude: -74.083579, category:3, title:'Country'},
+      ], 
       Mapa:[],
       location:null,
       errorMsg:null,
@@ -103,6 +103,7 @@ class App extends Component {
 
   async componentDidMount(){
     
+    //console.log('We are in')
     const url = 'http://181.54.182.7:5000/api/hospitals'
     const response = await fetch(url)
     let data = await response.json()

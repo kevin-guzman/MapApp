@@ -5,7 +5,8 @@ import {    StyleSheet,
             StatusBar,
             TouchableOpacity,
             TextInput,
-            AsyncStorage
+            AsyncStorage,
+            Alert
         } from 'react-native';
 import {QRCode} from 'react-native-custom-qr-codes-expo';
 import Styles from '../styles/style'
@@ -45,7 +46,7 @@ class QR extends Component{
         .then((response) => response.json())
             .then((text) => {
             //console.log(text._id)
-            console.log(text._id.toString())
+            //console.log(text._id.toString())
             this.setState({valueForQRCode: (text._id).toString()})
             })
             .catch(err=>{
@@ -63,8 +64,23 @@ class QR extends Component{
 
             let user = await AsyncStorage.getItem('UserData'); 
             const {navigation}= this.props;
+            const aux ={
+                nameh: JSON.stringify(navigation.getParam('HospitalName', '')),
+                lat: JSON.stringify(navigation.getParam('UserLatitude', '')),
+                lng: JSON.stringify(navigation.getParam('UserLongitude', ''))
+            }
             //var obj =[]
-            obj = JSON.parse(user)   
+            obj = JSON.parse(user)
+            /* this.setState({Aux: user})
+            
+            Aux.map() */
+            obj['nameh']=JSON.stringify(navigation.getParam('HospitalName', ''))
+            obj['lat']=JSON.stringify(navigation.getParam('UserLatitude', ''))
+            obj['lng']=JSON.stringify(navigation.getParam('UserLongitude', ''))
+            console.log(JSON.stringify(navigation.getParam('HospitalName', '')))
+            console.log('Heree')
+            console.log(obj) 
+            //Alert.alert(JSON.stringify(obj))
             this.submit(obj)
 
         }  
