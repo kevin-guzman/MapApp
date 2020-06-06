@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import { StyleSheet, 
           Text, 
           View,
-          Button,
+          StatusBar,
           TouchableOpacity,
-          Alert,
           Image
         } from 'react-native';
 import  MapView,
@@ -261,7 +260,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop:'15%',
+    marginTop: StatusBar.currentHeight
+    //paddingTop:'15%',
+
     //flexDirection:'row'
     
   },

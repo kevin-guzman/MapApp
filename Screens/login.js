@@ -6,7 +6,8 @@ import {View,
         TouchableOpacity,
         AsyncStorage,
         SafeAreaView,
-        KeyboardAvoidingView
+        KeyboardAvoidingView,
+        StatusBar
     } from 'react-native'
 import Styles from '../styles/style'
 
@@ -101,7 +102,7 @@ export default class Login extends Component{
 
     render(){
         return(
-            <View style={style.container}>
+            <SafeAreaView style={style.container}>
                 <View style={style.header}>
                 </View>
                 <KeyboardAvoidingView style={style.body}>
@@ -139,7 +140,7 @@ export default class Login extends Component{
                 <View style={style.footer}>
                 
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -147,7 +148,9 @@ export default class Login extends Component{
 const style = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'#629FDD'
+        backgroundColor:'#629FDD',
+        marginTop: StatusBar.currentHeight
+        
     },
     header:{
         flex:1
@@ -183,10 +186,6 @@ const style = StyleSheet.create({
         marginTop: '15%',
         borderBottomColor: 'black',
         borderBottomWidth: 0.5,
-        //borderRadius: 16,
-        borderTopLeftRadius: 14,
-        borderTopRightRadius:14,
-        backgroundColor:"#EEEAEA",
         height:"20%"
     },
     bodyHeader:{

@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {    StyleSheet, 
             Text, 
             View,
-            Button,
+            StatusBar,
             TouchableOpacity,
-            Alert,
             TextInput,
             AsyncStorage
         } from 'react-native';
@@ -117,7 +116,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         alignContent:'center',
-        marginTop:'15%'
+        marginTop: StatusBar.currentHeight
+        //marginTop:'15%'
         //marginBottom:'5%',
         //backgroundColor: '#fff',
     },
