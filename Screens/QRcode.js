@@ -109,16 +109,23 @@ class QR extends Component{
                     </Text>
                 </View>
                 
-                <View style={styles.QR} >
-                    <QRCode     
-                        content={this.state.valueForQRCode} 
-                        logosize={250}
-                        color="#000"
-                    />                    
+                <View style={styles.viewQR} >
+                    <View style={styles.QR} >
+                        <QRCode     
+                            content={this.state.valueForQRCode} 
+                            logosize={250}
+                            color="#000"
+                        /> 
+                    </View>
+                   
                 </View>
-                <View style={styles.buttonRight} >
+
+                <View style={styles.buttons} >
                     <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}> 
                         <Text style={Styles.TextButton}> Mapa </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}> 
+                        <Text style={Styles.TextButton}> Ir </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -132,21 +139,29 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight,
     },
-    QR:{
+    viewQR:{
         flex:4,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        
+        
+    },
+    QR:{
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.9,
+        borderTopColor: 'gray',
+        borderTopWidth: 0.9,
     },
     header:{
         flex:1,
         justifyContent: 'flex-end',
         alignItems:'center'
     },
-    buttonRight:{
+    buttons:{
         flex:1,
         flexDirection:'row',
-        justifyContent:'center',
+        justifyContent:'space-around',
         alignItems: 'center'
-    }
+    },
 });
 export default QR
