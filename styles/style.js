@@ -8,7 +8,8 @@ const Style = StyleSheet.create({
         paddingBottom: 12,
         paddingTop: 12,
         paddingLeft: 33,
-        paddingRight: 33 
+        paddingRight: 33,
+        flexDirection:'row', //////Tener en cuenta esto XD
     },
     buttonSecondary:{
         alignItems: "center",

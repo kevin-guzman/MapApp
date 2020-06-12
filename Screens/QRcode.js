@@ -10,6 +10,7 @@ import {    StyleSheet,
         } from 'react-native';
 import {QRCode} from 'react-native-custom-qr-codes-expo';
 import Styles from '../styles/style'
+import { Icon } from 'react-native-elements'
 
 
 class QR extends Component{
@@ -20,6 +21,7 @@ class QR extends Component{
             valueForQRCode: 'n',
             HospitalsInfo:null,
             Aux:[],
+            Ir: false
         };
     }
 
@@ -37,9 +39,9 @@ class QR extends Component{
             body: JSON.stringify({
             
                 obj,
-                nameh: JSON.stringify(navigation.getParam('HospitalName', '')),
+                /* nameh: JSON.stringify(navigation.getParam('HospitalName', '')),
                 lat: JSON.stringify(navigation.getParam('UserLatitude', '')),
-                lng: JSON.stringify(navigation.getParam('UserLongitude', '')),
+                lng: JSON.stringify(navigation.getParam('UserLongitude', '')), */
             
             }) 
         })
@@ -52,9 +54,12 @@ class QR extends Component{
             .catch(err=>{
             console.log(err)
             })
+            this.setState({Ir: true})
         }catch(err){
 
         }
+
+
         
     }
 
@@ -90,42 +95,52 @@ class QR extends Component{
     }
 
 
-    componentDidMount(){
+    /* componentDidMount(){
         {this.displayData()}
-    }
+    } */
 
 
     render(){
         const {navigation}= this.props;
+        const {Ir}=this.state;
         return(
 
             <View style={styles.container} >
                 <View style={styles.header} >
                     <Text style={Styles.TextTitle}>
-                        Hospital: {JSON.stringify(navigation.getParam('HospitalName', ''))}
+                        Hospital: {navigation.getParam('HospitalName', '')}
                     </Text>
                     <Text style={Styles.TextTitle}>
-                        Direccion: {JSON.stringify(navigation.getParam('HospitalAddres', ''))}
+                        Direccion: {navigation.getParam('HospitalAddres', '')}
                     </Text>
                 </View>
                 
                 <View style={styles.viewQR} >
                     <View style={styles.QR} >
-                        <QRCode     
-                            content={this.state.valueForQRCode} 
-                            logosize={250}
-                            color="#000"
-                        /> 
+                        {
+                            Ir === true?
+                            <QRCode     
+                                content={this.state.valueForQRCode} 
+                                logosize={250}
+                                color="#000"
+                            />
+                            :
+                            <View style={{width:250,height:250, borderWidth:0.4, borderColor: 'rgba(0,0,0,0.1)'}} >
+
+                            </View>
+                            //null
+                        }
                     </View>
-                   
                 </View>
 
                 <View style={styles.buttons} >
-                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}> 
+                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}>
                         <Text style={Styles.TextButton}> Mapa </Text>
+                        <Icon name="place" size={20} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=>navigation.navigate('Hospitals')}> 
+                    <TouchableOpacity style={Styles.buttonPrimary} onPress={()=> this.displayData()}  /* this.setState({Ir: true}) */ > 
                         <Text style={Styles.TextButton}> Ir </Text>
+                        <Icon name="send" size={20} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -143,8 +158,6 @@ const styles = StyleSheet.create({
         flex:4,
         justifyContent: 'center',
         alignItems: 'center',
-        
-        
     },
     QR:{
         borderBottomColor: 'gray',
