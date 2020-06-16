@@ -64,7 +64,8 @@ class QR extends Component{
     }
 
 
-    displayData = async ()=>{  
+    displayData = async ()=>{
+        this.setState({valueForQRCode: 'This is a QR code in AtiendeMeApp', Ir: true})  
         try{  
 
             let user = await AsyncStorage.getItem('UserData'); 
@@ -90,7 +91,7 @@ class QR extends Component{
 
         }  
         catch(error){  
-            alert(error)  
+            //alert(error)  
         }  
     }
 
